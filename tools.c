@@ -12,11 +12,6 @@ double **MatDin(int fil, int col)
 	 int i;
 	 double **A = NULL;
 	 A = (double **)malloc(fil*sizeof(double *));
-	 if(A == NULL)
-   {
-	   perror("ERROR. There is not enough memory");
-	   exit(EXIT_FAILURE);
-	 }
 	 for(i=0;i<fil;i++)
    {
 		 A[i]=(double *)malloc(col*sizeof(double));
@@ -26,7 +21,7 @@ double **MatDin(int fil, int col)
 		   exit(EXIT_FAILURE);
 		 }
 	 }
-   
+
 	 return A;
 }
 
@@ -42,14 +37,14 @@ double *VectDin(int n)
 	}
 	return vector;
 }
-  
 
-  
+
+
   /*Multiplicación Matriz Vector*/
-  
+
   double *MatMult(double **A, double *xx, int dimension, int fil)
 {
-	
+
 	int i,j;
 	double *bb=NULL;
 	bb=(double *) malloc((size_t) fil* sizeof(double) );
@@ -66,10 +61,8 @@ double *VectDin(int n)
 			contador+=A[i][j]*xx[j];
 		}
 		bb[i]=contador;
-		
+
 	}
 	return bb;
-	
+
 }
-  
-  
