@@ -28,7 +28,7 @@ C=(alfa*dt)/(dx*dx);
 x= VectDin(pasox+1);
 t= VectDin(pasot+1);
 T0= VectDin(pasox+1);
-A= MatDin(pasot-1, pasot-1);
+A= MatDin(pasox-1, pasox-1);
 T= MatDin(pasot+1, pasot+1);
 
 /*Vectores tiempo y espcacio discretizados*/
@@ -40,18 +40,18 @@ for(i=0; i<pasot+1;i++ )
  {
 		t[i]=i*dt;
 	}
-for(j=0; j<pasox+1;j++ ) /*Condición de frontera*/
+for(j=0; j<pasox+1;j++ ) /*Condición de frontera T_0(x)=e^{x}*/
  {
-		T0[j]=x0+j*dx;
+		T0[j]=exp(x[j]);
 	}
 
-/*Matriz K*/
+/*Matriz A=(I-CK)*/
 for(i=0; i<pasox-1;i++){
 		for(j=0;j<pasox-1;j++){
-			if(j==i-1){
-				A[i][j]=C;
-			}else if(j==i){
+			if(j==i){
 				A[i][j]=1-2*C;
+			}else if(j==i-1){
+				A[i][j]=C;
 			}else if (j==i+1){
 				A[i][j]=C;
 			}else{
@@ -59,6 +59,43 @@ for(i=0; i<pasox-1;i++){
 			}
 		}
 	}
+
+/* Matriz final T^{k+1} que es la A*T^{k}+dt*q^{k}, solo las condiciones de frontera */
+for(j=0; j<pasox+1;j++)
+  {
+		T[0][j]=T0[j];
+	}
+	for(i=0;i<pasot+1;i++)
+  {
+		T[i][0]=0.0d;
+		T[i][pasox]=0.0d;
+	}
+
+/* Elemento q*dt*/
+double *qdt = VectDin(pasox-1);
+double *v = VectDin(pasox-1);
+for(i=1; i<pasot+1;i++)
+{
+  for(j=0; j<pasox-1;j++)
+  {
+    qdt[j]=cos(M_PI*t[i])*sin(2*M_PI*x[j+1])*dt;
+    /* Se van creando vectores T^{k} para luego multiplicarlos con A, con x variando y t fijo*/
+    v[j]=T[i-1][j+1];
+  }
+
+/* Solución final Euler Explícito*/
+double *ATk= MatMult(A, v, pasox-1, pasox-1);
+double *v2 = VectDin(pasox-1);
+for(i=1; i<pasot+1;i++)
+{
+  for(j=0; j<pasox-1;j++)
+  {
+    T[i][j+1]=ATk[j]+qdt[j];
+  }
+}
+
+
+
 
 
 
