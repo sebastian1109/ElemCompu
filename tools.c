@@ -8,7 +8,8 @@
 /* Creación Matriz dinámica para producto Matriz-vector */
 double **MatDin(int fil, int col){
 	 int i;
-	 double **A = (double **)malloc(fil*sizeof(double *));
+	 double **A = NULL;
+	 A = (double **)malloc(fil*sizeof(double *));
 	 if(A == NULL){
 	   perror("ERROR. There is not enough memory");
 	   exit(EXIT_FAILURE);
