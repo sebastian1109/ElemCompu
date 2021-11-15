@@ -43,7 +43,7 @@ double *VectDin(int n)
 	return vector;
 }
   
-  
+
   
   /*Multiplicación Matriz Vector*/
   
@@ -52,8 +52,8 @@ double *VectDin(int n)
 	
 	int i,j;
 	double *bb=NULL;
-	result=(double *) malloc((size_t) fil* sizeof(double) );
-	if(result==NULL)
+	bb=(double *) malloc((size_t) fil* sizeof(double) );
+	if(bb==NULL)
   {
 		perror("ERROR. There is not enough memory");
 		exit(EXIT_FAILURE);
