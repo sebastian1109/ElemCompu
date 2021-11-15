@@ -3,6 +3,7 @@
 #include <errno.h>
 #include <math.h>
 #include <time.h>
+#include "tools.h"
 
 
 /* Creación Matriz dinámica para producto Matriz-vector */
