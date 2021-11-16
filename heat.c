@@ -37,15 +37,13 @@ T= MatDin(pasot+1, pasox+1);
 for(j=0; j<pasox+1;j++ )
  {
 		x[j]=x0+j*dx;
+    T0[j]=exp(x[j]); /*Condición de Frontera T0(x)=e^(X)*/
 	}
 for(i=0; i<pasot+1;i++ )
  {
 		t[i]=i*dt;
 	}
-for(j=0; j<pasox+1;j++ ) /*Condición de frontera T_0(x)=e^{x}*/
- {
-		T0[j]=exp(x[j]);
-	}
+
 
 /*Matriz A=(I-CK)*/
 for(i=0; i<pasox-1;i++){
