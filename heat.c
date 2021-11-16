@@ -14,8 +14,8 @@ int main()
 
 int i,j,k,l;
 double alfa=1.0 ,C ,tf=1.0 , dx , dt;
-double x0=0.0d;
-double xf=1.0d;
+double x0=0.0;
+double xf=1.0;
 double **A, **T;
 double *t;
 double *x;
@@ -57,7 +57,7 @@ for(i=0; i<pasox-1;i++){
 			}else if (j==i+1){
 				A[i][j]=C;
 			}else{
-				A[i][j]=0.0d;
+				A[i][j]=0.0;
 			}
 		}
 	}
@@ -69,8 +69,8 @@ for(j=0; j<pasox+1;j++)
 	}
 	for(i=0;i<pasot+1;i++)
   {
-		T[i][0]=0.0d;
-		T[i][pasox]=0.0d;
+		T[i][0]=0.0;
+		T[i][pasox]=0.0;
 	}
 
 /* Elemento q*dt*/
@@ -81,29 +81,41 @@ for(i=1; i<pasot+1;i++)
   for(j=0; j<pasox-1;j++)
   {
     qdt[j]=cos(M_PI*t[i])*sin(2*M_PI*x[j+1])*dt;
-    /* Se van creando vectores T^{k} para luego multiplicarlos con A, con x variando y t fijo*/
+/* Se van creando vectores T^{k} para luego multiplicarlos con A, con x variando y t fijo*/
     v[j]=T[i-1][j+1];
   }
-}
+
 /* Solución final Euler Explícito*/
 double *ATk= MatMult(A, v, pasox-1, pasox-1);
-for(i=1; i<pasot+1;i++)
-{
-  for(j=0; j<pasox-1;j++)
+  for(k=0; k<pasox-1;k++)
   {
-    T[i][j+1]=ATk[j]+qdt[j];
+    T[i][k+1]=ATk[k]+qdt[k];
+    
   }
 }
+
+for (i=0;i<pasot+1;i++){
+    for (j=0;j<pasox+1;j++){
+      
+      printf("%f \t",T[i][j]);
+    }
+    printf("\n");
+  }
 
 /* Método Euler Implícito */
 
+
+/*
 double **TI;
 double **AI;
 
 TI = MatDin(pasot+1, pasox+1);
 AI = MatDin(pasox-1, pasox-1);
+*/
 
 /*Matriz AI=(I+CK)*/
+
+/*
 for(i=0; i<pasox-1;i++){
 		for(j=0;j<pasox-1;j++){
 			if(j==i){
@@ -118,7 +130,12 @@ for(i=0; i<pasox-1;i++){
 		}
 	}
 
+*/
+
 /* Matriz final T^{k+1} que es la A*T^{k}+dt*q^{k}, solo las condiciones de frontera */
+
+/*
+
 for(j=0; j<pasox+1;j++)
   {
 		TI[0][j]=T0[j];
@@ -129,7 +146,13 @@ for(j=0; j<pasox+1;j++)
 		TI[i][pasox]=0.0d;
 	}
 
+
+*/
+
+
 /* Elemento q*dt*/
+/*
+
 double *qIdt = VectDin(pasox-1);
 double *vI = VectDin(pasox-1);
 double *v2 = VectDin(pasox-1);
@@ -138,11 +161,26 @@ for(i=1; i<pasot+1;i++)
   for(j=0; j<pasox-1;j++)
   {
     qIdt[j]=cos(M_PI*t[i+1])*sin(2*M_PI*x[j+1])*dt;
+
+
+  */
+
     /* Se van creando vectores T^{k} para luego sumarlo con q^{k+1}dt*/
+
+/*
+
     vI[j]=TI[i-1][j+1];
   }
 }
+
+
+*/
+
 /* Suma TIk +q^{k+1}*dt*/
+
+/*
+
+
 for(i=1; i<pasot+1;i++)
 {
   for(j=0; j<pasox-1;j++)
@@ -150,6 +188,8 @@ for(i=1; i<pasot+1;i++)
     v2[j] = vI[j] + qIdt[j];
   }
 }
+
+*/
 
 /* Se resuelve el sistema de ecuaciones lineales utilizando Jacobi */
 
