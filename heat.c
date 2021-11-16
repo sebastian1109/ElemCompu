@@ -19,7 +19,7 @@ double xf=1.0;
 double **A, **T;
 double *t;
 double *x;
-double *T0, *Ta, *Tb;
+double *T0, Ta=0.0, Tb=0.0;
 
 int pasox=100, pasot=2000;
 
@@ -69,8 +69,8 @@ for(j=0; j<pasox+1;j++)
 	}
 	for(i=0;i<pasot+1;i++)
   {
-		T[i][0]=0.0;
-		T[i][pasox]=0.0;
+		T[i][0]=Ta;
+		T[i][pasox]=Tb;
 	}
 
 /* Elemento q*dt*/
