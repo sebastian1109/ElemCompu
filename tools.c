@@ -66,3 +66,45 @@ double *VectDin(int n)
 	return bb;
 
 }
+
+int Jacobi(int n, double **A, double *b, int *xi, double eps, int maxIt){
+	
+	int i, j, k = 0;
+	double *xk=NULL;  //Nuevo Vector a formar 
+	xk = (double *) malloc(n * sizeof(double));
+	if (xk==NULL){
+		perror("ERROR. There is not enough memory");
+		exit(EXIT_FAILURE);
+	}
+	
+	double err;
+
+	while (k < maxIt, k++){
+		for (i = 0; i < n; i++){
+			
+			double sum, diff;
+			
+			sum = b[i];
+			for (j = 0; j < n; j++){
+				sum = sum - A[i][j]*xi[j];
+			}
+			
+			sum = sum + A[i][i]*xi[i];
+			xk[i] = sum/A[i][i];
+			
+			diff = xk[i] - xi[i];
+			err = err + diff*diff;
+		}
+		
+		if (err < eps){
+			break;
+			
+		} else{
+			xi[i] = xk[i];
+			
+		}
+		
+	}
+	
+	return k;
+}
