@@ -103,17 +103,16 @@ for (i=0;i<pasot+1;i++){
 /* Método Euler Implícito */
 
 
-/*
 double **TI;
 double **AI;
 
 TI = MatDin(pasot+1, pasox+1);
 AI = MatDin(pasox-1, pasox-1);
-*/
+
 
 /*Matriz AI=(I+CK)*/
 
-/*
+
 for(i=0; i<pasox-1;i++){
 		for(j=0;j<pasox-1;j++){
 			if(j==i){
@@ -128,11 +127,11 @@ for(i=0; i<pasox-1;i++){
 		}
 	}
 
-*/
+
 
 /* Matriz final T^{k+1} que es la A*T^{k}+dt*q^{k}, solo las condiciones de frontera */
 
-/*
+
 
 for(j=0; j<pasox+1;j++)
   {
@@ -145,11 +144,11 @@ for(j=0; j<pasox+1;j++)
 	}
 
 
-*/
+
 
 
 /* Elemento q*dt*/
-/*
+
 
 double *qIdt = VectDin(pasox-1);
 double *vI = VectDin(pasox-1);
@@ -161,22 +160,22 @@ for(i=1; i<pasot+1;i++)
     qIdt[j]=cos(M_PI*t[i+1])*sin(2*M_PI*x[j+1])*dt;
 
 
-  */
+  
 
     /* Se van creando vectores T^{k} para luego sumarlo con q^{k+1}dt*/
 
-/*
+
 
     vI[j]=TI[i-1][j+1];
   }
 }
 
 
-*/
+
 
 /* Suma TIk +q^{k+1}*dt*/
 
-/*
+
 
 
 for(i=1; i<pasot+1;i++)
@@ -187,7 +186,7 @@ for(i=1; i<pasot+1;i++)
   }
 }
 
-*/
+
 
 /* Se resuelve el sistema de ecuaciones lineales utilizando Jacobi */
 

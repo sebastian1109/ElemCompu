@@ -55,7 +55,7 @@ double *VectDin(int n)
 	}
 	for(i=0; i<fil; i++)
   {
-		double contador=0.0d;
+		double contador=0.0;
 		for(j=0; j<dimension;j++)
     {
 			contador+=A[i][j]*xx[j];
