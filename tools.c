@@ -108,3 +108,27 @@ int Jacobi(int n, double **A, double *b, int *xi, double eps, int maxIt){
 	
 	return k;
 }
+
+void Jacobi(int l, float x[], float a[][100], float b[]){
+	char p;
+	float c[n];
+	int k, i, j;
+	line:
+	for (k=0;k<100;k++){
+	for (i=0;i<l,i++) {
+		c[i]=b[i];
+		for (j=0,j<l;j++){
+			if (i!=j) {
+				c[i]=c[i]-a[i][j]*x[j];
+			}
+		}	
+	}
+	for (i=0;i<n;i++){
+		x[i]=c[i]/a[i][i];
+	}
+}
+		cout<<"La solución es: "<<endl;
+		for (i=0,i<l;i++){
+			cout<<"x("<<i<<")="<<x[i]<<endl;
+		}
+		
